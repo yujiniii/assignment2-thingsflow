@@ -37,3 +37,24 @@ router.post("/post", async (req, res, next) => {
     next(err);
   }
 });
+
+// 게시글 수정
+router.fetch("/post", async (req, res, next) => {
+  try {
+    const { postId, title, content, password, userId } = req.body;
+
+    const weather = postService.findWeather(userId);
+    const updated = await postService.postUpdeted(
+      postId,
+      title,
+      content,
+      password,
+      userId,
+      weather
+    );
+
+    res.status(200).json({ updated });
+  } catch (err) {
+    next(err);
+  }
+});
