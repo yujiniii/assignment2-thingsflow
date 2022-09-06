@@ -11,11 +11,11 @@ const Post = (sequelize) =>
         primaryKey: true,
       },
       title: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(20),
         allowNull: false,
       },
       content: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(200),
         allowNull: false,
       },
       password: {
