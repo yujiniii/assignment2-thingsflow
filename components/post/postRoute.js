@@ -58,3 +58,17 @@ router.fetch("/post", async (req, res, next) => {
     next(err);
   }
 });
+
+// 게시글 삭제
+router.delete("/post", async (req, res, next) => {
+  try {
+    const { postId } = req.body;
+    const deleted = await postService.postDeleted(postId);
+
+    res.status(200).json({ deleted });
+  } catch (err) {
+    next(err);
+  }
+});
+
+module.exports = router;
