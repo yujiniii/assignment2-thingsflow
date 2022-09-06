@@ -38,11 +38,12 @@ router.post("/post", async (req, res, next) => {
 });
 
 // 게시글 수정
-router.fetch("/post", async (req, res, next) => {
+router.patch("/post", async (req, res, next) => {
   try {
     const { postId, title, content, password, userId } = req.body;
 
-    const weather = postService.findWeather(userId);
+    //const weather = postService.findWeather(userId);
+    const weather = "good";
     const updated = await postService.postUpdeted(
       postId,
       title,

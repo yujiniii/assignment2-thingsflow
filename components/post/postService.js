@@ -23,6 +23,16 @@ const findWeather = async (userId) => {
   return weatherState;
 };
 
+const userAuth = async (postId, hashPassword) => {
+  const findPostPassword = await Post.findOne({
+    postId: postId,
+  });
+  if (findPostPassword.dataValues.password === hashPassword) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 const newPasswordAuth = (password) => {
   if (password.length > 6 && (isNaN(password))){
@@ -47,6 +57,40 @@ const postPosted = async (title, content, password, userId, weather) => {
     throw new Error(err);
   });
   return create;
+};
+
+const postUpdeted = async (
+  postId,
+  title,
+  content,
+  password,
+  userId,
+  weather
+) => {
+  const hashPassword = crypto
+    .createHash("sha256")
+    .update(password)
+    .digest("base64");
+  const isPasswordTrue = await userAuth(userId, hashPassword);
+  if (isPasswordTrue) {
+    const update = await Post.update(
+      {
+        title: title,
+        content: content,
+        weather: weather,
+      },
+      {
+        where: {
+          postId: postId,
+        },
+      }
+    ).catch((err) => {
+      throw new Error(err);
+    });
+    return update;
+  } else {
+    throw new Error("올바른 비밀번호를 입력해 주세요.");
+  }
 };
 
 
