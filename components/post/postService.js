@@ -35,7 +35,7 @@ const userAuth = async (postId, hashPassword) => {
 };
 
 const newPasswordAuth = (password) => {
-  if (password.length > 6 && (isNaN(password))){
+  if (password.length > 6 && isNaN(password)) {
     return true;
   } else {
     return false;
@@ -93,6 +93,15 @@ const postUpdeted = async (
   }
 };
 
+const postDeleted = async (postId) => {
+  const destroyResult = await Post.destroy({
+    where: { postId: postId },
+  }).catch((err) => {
+    throw new Error(err);
+  });
+
+  return destroyResult;
+};
 
 module.exports = {
   postDeleted,
