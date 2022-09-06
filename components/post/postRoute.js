@@ -17,8 +17,10 @@ router.get("/post", async (req, res, next) => {
 router.post("/post", async (req, res, next) => {
   try {
     const { title, content, password, userId } = req.body;
-    if (postService.newPasswordAuth(password)) {
-      const weather = postService.findWeather(userId);
+    const isPasswordPolicy = await postService.newPasswordAuth(password);
+    if (isPasswordPolicy) {
+      //const weather = postService.findWeather(userId);
+      const weather = "good";
       const posted = await postService.postPosted(
         title,
         content,
