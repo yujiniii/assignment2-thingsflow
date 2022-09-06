@@ -2,6 +2,7 @@ const express = require("express");
 const logger = require("morgan");
 const db = require("./models");
 const postRouter = require("./components/post/postRoute");
+const userRouter = require("./components/user/userRoute");
 const app = express();
 
 app.use(logger("dev"));
@@ -16,6 +17,7 @@ db.sequelize
     console.log("fail : ", err);
   });
 
+app.use(userRouter);
 app.use(postRouter);
 
 app.use((err, req, res, next) => {
