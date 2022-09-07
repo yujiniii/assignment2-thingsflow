@@ -104,16 +104,8 @@ const postUpdeted = async (
   postId,
   title,
   content,
-  password,
-  userId,
   weather
 ) => {
-  const hashPassword = crypto
-    .createHash("sha256")
-    .update(password)
-    .digest("base64");
-  const isPasswordTrue = await userAuth(userId, hashPassword);
-  if (isPasswordTrue) {
     const update = await Post.update(
       {
         title: title,
@@ -129,9 +121,6 @@ const postUpdeted = async (
       throw new Error(err);
     });
     return update;
-  } else {
-    throw new Error("올바른 비밀번호를 입력해 주세요.");
-  }
 };
 
 /**
@@ -140,23 +129,14 @@ const postUpdeted = async (
  * @param {string} password 
  * @returns 
  */
-const postDeleted = async (postId,password) => {
-  const hashPassword = crypto
-    .createHash("sha256")
-    .update(password)
-    .digest("base64");
-  const isPasswordTrue = await userAuth(userId, hashPassword);
-  if (isPasswordTrue) {
+
+const postDeleted = async (postId) => {
     const destroyResult = await Post.destroy({
       where: { postId: postId },
     }).catch((err) => {
       throw new Error(err);
     });
     return destroyResult;
-  } else {
-    throw new Error('올바른 비밀번호를 입력하세요');
-  }
-
   
 };
 
@@ -167,4 +147,5 @@ module.exports = {
   findLocation,
   newPasswordAuth,
   allPostsWithOrdering,
+  userAuth
 };

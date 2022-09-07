@@ -3,6 +3,7 @@ const postService = require("./postService");
 const router = express.Router();
 const dotenv = require("dotenv");
 const axios = require('axios');
+const crypto = require("crypto");
 dotenv.config();
 const apiKey = process.env.API_KEY;
 const weatherUrl = "http://api.weatherapi.com/v1/current.json"  
@@ -31,9 +32,9 @@ router.get("/post", async (req, res, next) => {
 router.post("/post", async (req, res, next) => {
   try {
     const { title, content, password, userId } = req.body;
-    const isPasswordPolicy = await postService.newPasswordAuth(password);
+    const isPasswordPolicy =  postService.newPasswordAuth(password);
     if (isPasswordPolicy) {
-      const location = await postService.findLocation(userId);
+      const location =  postService.findLocation(userId);
       axios({
         url:weatherUrl,
         method:"get",
@@ -65,8 +66,13 @@ router.post("/post", async (req, res, next) => {
 router.patch("/post", async (req, res, next) => {
   try {
     const { postId, title, content, password, userId } = req.body;
-
-    //const weather = postService.findWeather(userId);
+    const hashPassword = crypto
+    .createHash("sha256")
+    .update(password)
+    .digest("base64");
+    const isPasswordTrue = await  postService.userAuth(postId, hashPassword);
+    if(isPasswordTrue){
+    const location = await postService.findLocation(userId);
     axios({
       url:weatherUrl,
       method:"get",
@@ -79,14 +85,15 @@ router.patch("/post", async (req, res, next) => {
         title,
         content,
         password,
-        userId,
         weather
       );
     }).catch((err)=>{
       next(err);
     });
-
-    res.status(200).json({ updated });
+      res.status(200).json({ message:"수정이 완료되었습니다" });
+    } else {
+      res.status(500).json({ message:"올바른 비밀번호를 입력하세요" });
+    }
   } catch (err) {
     next(err);
   }
@@ -96,9 +103,18 @@ router.patch("/post", async (req, res, next) => {
 router.delete("/post", async (req, res, next) => {
   try {
     const { postId, password } = req.body;
-    const deleted = await postService.postDeleted(postId,password);
+    const hashPassword = crypto
+    .createHash("sha256")
+    .update(password)
+    .digest("base64");
+    const isPasswordTrue = await postService.userAuth(postId, hashPassword);
+    if (isPasswordTrue){
+    const deleted = await postService.postDeleted( postId);
 
     res.status(200).json({ deleted });
+  }else {
+      res.status(200).json({ message:"올바른 비밀번호룰 입력해주세요" });
+    }
   } catch (err) {
     next(err);
   }
