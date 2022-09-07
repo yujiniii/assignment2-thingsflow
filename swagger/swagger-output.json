@@ -1,0 +1,164 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "게시글 관리 api 서버",
+    "description": "프로그래머스 온보딩 2차 과제",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/post": {
+      "get": {
+        "description": "모든 게시글 불러오기",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "게시글 등록하기",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "example": "오날 날씨 정말 좋지 않나요??"
+                  },
+                  "content": {
+                    "example": "이런 날씨엔 밖에 나가서 아아 한잔 해야하는데!!☕☕"
+                  },
+                  "password": {
+                    "example": "12345aa"
+                  },
+                  "userId": {
+                    "example": "1"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "postId": {
+                    "example": "1"
+                  },
+                  "title": {
+                    "example": "오늘 날씨 정말 좋지 않나요??"
+                  },
+                  "content": {
+                    "example": "이런 날씨엔 밖에 나가서 아아 한잔 해야하는데!!☕☕"
+                  },
+                  "password": {
+                    "example": "12345aa"
+                  },
+                  "userId": {
+                    "example": "1"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "postId": {
+                    "example": "1"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "description": "모든 사용자 조회",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "사용자 등록하기(날씨 조회를 위해 도시는 영어로 작성)",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "example": "서유진"
+                  },
+                  "location": {
+                    "example": "Seoul"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
