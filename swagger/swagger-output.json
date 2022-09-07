@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "This is my API Document",
-    "description": "게시글 관리 api 서버",
+    "title": "게시글 관리 api 서버",
+    "description": "프로그래머스 온보딩 2차 과제",
     "version": "1.0.0"
   },
   "servers": [
@@ -13,7 +13,7 @@
   "paths": {
     "/post": {
       "get": {
-        "description": "",
+        "description": "모든 게시글 불러오기",
         "parameters": [
           {
             "name": "page",
@@ -30,7 +30,7 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "게시글 등록하기",
         "parameters": [],
         "responses": {
           "200": {
@@ -47,16 +47,16 @@
                 "type": "object",
                 "properties": {
                   "title": {
-                    "example": "any"
+                    "example": "오날 날씨 정말 좋지 않나요??"
                   },
                   "content": {
-                    "example": "any"
+                    "example": "이런 날씨엔 밖에 나가서 아아 한잔 해야하는데!!☕☕"
                   },
                   "password": {
-                    "example": "any"
+                    "example": "12345aa"
                   },
                   "userId": {
-                    "example": "any"
+                    "example": "1"
                   }
                 }
               }
@@ -79,19 +79,19 @@
                 "type": "object",
                 "properties": {
                   "postId": {
-                    "example": "any"
+                    "example": "1"
                   },
                   "title": {
-                    "example": "any"
+                    "example": "오늘 날씨 정말 좋지 않나요??"
                   },
                   "content": {
-                    "example": "any"
+                    "example": "이런 날씨엔 밖에 나가서 아아 한잔 해야하는데!!☕☕"
                   },
                   "password": {
-                    "example": "any"
+                    "example": "12345aa"
                   },
                   "userId": {
-                    "example": "any"
+                    "example": "1"
                   }
                 }
               }
@@ -114,7 +114,7 @@
                 "type": "object",
                 "properties": {
                   "postId": {
-                    "example": "any"
+                    "example": "1"
                   }
                 }
               }
@@ -125,7 +125,7 @@
     },
     "/user": {
       "get": {
-        "description": "",
+        "description": "모든 사용자 조회",
         "parameters": [],
         "responses": {
           "200": {
@@ -134,7 +134,7 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "사용자 등록하기(날씨 조회를 위해 도시는 영어로 작성)",
         "parameters": [],
         "responses": {
           "200": {
@@ -148,10 +148,10 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "example": "any"
+                    "example": "서유진"
                   },
                   "location": {
-                    "example": "any"
+                    "example": "Seoul"
                   }
                 }
               }
