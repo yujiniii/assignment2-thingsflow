@@ -95,7 +95,6 @@ const postPosted = async (title, content, password, userId,weather) => {
  * @param {number} postId 
  * @param {string} title 
  * @param {string} content 
- * @param {string} password 
  * @param {number} userId 
  * @param {string} weather 
  * @returns 
@@ -126,7 +125,6 @@ const postUpdeted = async (
 /**
  * 게시글 삭제
  * @param {number} postId 
- * @param {string} password 
  * @returns 
  */
 const postDeleted = async (postId) => {
