@@ -129,7 +129,6 @@ const postUpdeted = async (
  * @param {string} password 
  * @returns 
  */
-
 const postDeleted = async (postId) => {
     const destroyResult = await Post.destroy({
       where: { postId: postId },

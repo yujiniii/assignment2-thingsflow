@@ -72,6 +72,7 @@ router.patch("/post", async (req, res, next) => {
     .digest("base64");
     const isPasswordTrue = await  postService.userAuth(postId, hashPassword);
     if(isPasswordTrue){
+
     const location = await postService.findLocation(userId);
     axios({
       url:weatherUrl,
