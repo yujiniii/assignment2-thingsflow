@@ -15,7 +15,9 @@
 - 게시글은 최근 순으로 보여지고, 되도록이면 페이지네이션을 이용해주세요
 
 ### ERD
-
+![image](https://user-images.githubusercontent.com/50348197/188912891-6d5a37c9-1089-4655-9b13-3efe717747f6.png)
+각 모델간의 관계는 위 사진과 같습니다.
+한 사용자는(users)는 여러 명의 입사지원한 사용자(posts)를 작성할 수 있습니다.
 
 ### 기술 스택
 `nodejs` `express.js` `sequelize` `mySql` `swagger`
@@ -25,7 +27,7 @@
 ├── README.md
 ├── components
 │   ├── posts
-│   │   ├── postApi.js
+│   │   ├── postApi.js 
 │   │   ├── postService.js
 │   └── users
 │   │   ├── postApi.js
@@ -42,7 +44,7 @@
 ├── .gitignore
 ├── .gcloudignore
 ├── .gitattributes
-├── app.yaml
+├── app.yaml 
 ├── www.js
 ├── index.js
 ├── package-lock.json
@@ -52,7 +54,23 @@
 
 ## 💡 요구사항 구현 내용
 
-![POSTMAN](https://documenter.getpostman.com/view/19606295/VVBTVT6i)
+[POSTMAN](https://documenter.getpostman.com/view/19606295/VVBTVT6i)
+#### 사용자 등록
+![image](https://user-images.githubusercontent.com/50348197/188913179-4da6bcfe-7034-41bd-97bb-c823748e6ab1.png)
+
+### 게시글 등록
+![image](https://user-images.githubusercontent.com/50348197/188913323-51651bc9-de64-4367-a308-e5f33101d2af.png)
+
+### 게시글 조회
+![image](https://user-images.githubusercontent.com/50348197/188913494-b5a080d6-c7ba-4c97-9a9a-e4fdd5b35914.png)
+
+### 게시글 수정
+![image](https://user-images.githubusercontent.com/50348197/188914302-b9ef1e06-9e5a-4f82-bf29-b108c2f7091f.png)
+![image](https://user-images.githubusercontent.com/50348197/188914211-07e97e12-c9f7-4ae2-a93c-364ebcd0f2eb.png)
+
+### 게시글 삭제
+![image](https://user-images.githubusercontent.com/50348197/188914935-9d5c481e-7f01-4aa9-a498-a429a263d0fe.png)
+
 
 ## 🛠 실행 방법 정리
 ```
