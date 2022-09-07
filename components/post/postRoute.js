@@ -65,8 +65,7 @@ router.post("/post", async (req, res, next) => {
 router.patch("/post", async (req, res, next) => {
   try {
     const { postId, title, content, password, userId } = req.body;
-
-    //const weather = postService.findWeather(userId);
+    const location = await postService.findLocation(userId);
     axios({
       url:weatherUrl,
       method:"get",
