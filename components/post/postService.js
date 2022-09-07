@@ -6,10 +6,12 @@ const crypto = require("crypto");
 /**
  * 모든 게시글을 정렬해서 찾아줌
  */
-const allPostsWithOrdering = async () => {
+const allPostsWithOrdering = async (offset,limit) => {
   const all = await Post.findAll({
-    attributes: ["title", "content", "created_at"],
+    attributes: ["postId","title", "content", "weather","created_at"],
     order: [["created_at", "DESC"]],
+    offset: offset,
+    limit: limit,
   }).catch((err) => {
     throw new Error(err);
   });

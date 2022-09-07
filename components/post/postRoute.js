@@ -13,8 +13,13 @@ const weatherUrl = "http://api.weatherapi.com/v1/current.json"
 // 게시글 조회
 router.get("/post", async (req, res, next) => {
   try {
-    const allPosts = await postService.allPostsWithOrdering();
-    
+    let pageNum = req.query.page; // 요청 페이지 넘버
+    let offset = 0;
+    if (pageNum > 1) {
+      offset = 20 * (pageNum - 1);
+    }
+    const allPosts = await postService.allPostsWithOrdering(offset,20);
+
     res.status(200).json({ allPosts });
   } catch (err) {
     next(err);
