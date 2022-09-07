@@ -95,8 +95,8 @@ router.patch("/post", async (req, res, next) => {
 // 게시글 삭제
 router.delete("/post", async (req, res, next) => {
   try {
-    const { postId } = req.body;
-    const deleted = await postService.postDeleted(postId);
+    const { postId, password } = req.body;
+    const deleted = await postService.postDeleted(postId,password);
 
     res.status(200).json({ deleted });
   } catch (err) {

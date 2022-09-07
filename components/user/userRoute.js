@@ -2,7 +2,7 @@ const express = require("express");
 const userService = require("./userService");
 const router = express.Router();
 
-// 게시글 조회
+// 사용자 조회
 router.get("/user", async (req, res, next) => {
   try {
     const allUsers = userService.allUser();

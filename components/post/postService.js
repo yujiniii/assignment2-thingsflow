@@ -18,7 +18,11 @@ const allPostsWithOrdering = async (offset,limit) => {
   return all;
 };
 
-
+/**
+ * 사용자 id에 해당하는 장소 조회
+ * @param {number} userId 
+ * @returns {StringConstructor}
+ */
 const findLocation = async (userId) => {
   const userLocation = await User.findOne({ userId: userId }).catch((err) => {
     throw new Error(err);
@@ -27,6 +31,12 @@ const findLocation = async (userId) => {
   return location;
 };
 
+/**
+ * 게시글 수정시 등록된 비밀번호와 같은지 조회
+ * @param {number} postId 
+ * @param {string} hashPassword 
+ * @returns {boolean}
+ */
 const userAuth = async (postId, hashPassword) => {
   const findPostPassword = await Post.findOne({
     postId: postId,
@@ -38,6 +48,11 @@ const userAuth = async (postId, hashPassword) => {
   }
 };
 
+/**
+ * 게시글에서 등록한 비밀번호가 조건에 맞게 작성되었는지 확인
+ * @param {string} password 
+ * @returns {boolean}
+ */
 const newPasswordAuth = (password) => {
   if(isNaN(parseInt(password))){
     return false;
@@ -49,6 +64,15 @@ const newPasswordAuth = (password) => {
   }
 };
 
+/**
+ *  게시글 등록
+ * @param {string} title 
+ * @param {string} content 
+ * @param {string} password 
+ * @param {number} userId 
+ * @param {string} weather 
+ * @returns 
+ */
 const postPosted = async (title, content, password, userId,weather) => {
   const hashPassword = await crypto
     .createHash("sha256")
@@ -66,6 +90,16 @@ const postPosted = async (title, content, password, userId,weather) => {
   return create;
 };
 
+/**
+ * 게시글 수정
+ * @param {number} postId 
+ * @param {string} title 
+ * @param {string} content 
+ * @param {string} password 
+ * @param {number} userId 
+ * @param {string} weather 
+ * @returns 
+ */
 const postUpdeted = async (
   postId,
   title,
@@ -100,14 +134,30 @@ const postUpdeted = async (
   }
 };
 
-const postDeleted = async (postId) => {
-  const destroyResult = await Post.destroy({
-    where: { postId: postId },
-  }).catch((err) => {
-    throw new Error(err);
-  });
+/**
+ * 게시글 삭제
+ * @param {number} postId 
+ * @param {string} password 
+ * @returns 
+ */
+const postDeleted = async (postId,password) => {
+  const hashPassword = crypto
+    .createHash("sha256")
+    .update(password)
+    .digest("base64");
+  const isPasswordTrue = await userAuth(userId, hashPassword);
+  if (isPasswordTrue) {
+    const destroyResult = await Post.destroy({
+      where: { postId: postId },
+    }).catch((err) => {
+      throw new Error(err);
+    });
+    return destroyResult;
+  } else {
+    throw new Error('올바른 비밀번호를 입력하세요');
+  }
 
-  return destroyResult;
+  
 };
 
 module.exports = {
