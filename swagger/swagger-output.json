@@ -115,6 +115,8 @@
                 "properties": {
                   "postId": {
                     "example": "1"
+                  },"password": {
+                    "example": "12345aa"
                   }
                 }
               }
