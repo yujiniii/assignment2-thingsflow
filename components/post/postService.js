@@ -1,5 +1,7 @@
-const { Post } = require("../../models/index");
+const { Post, User } = require("../../models/index");
 const crypto = require("crypto");
+
+
 
 /**
  * 모든 게시글을 정렬해서 찾아줌
@@ -14,13 +16,13 @@ const allPostsWithOrdering = async () => {
   return all;
 };
 
-const findWeather = async (userId) => {
-  const userLocation = await Post.findOne({ userId: userId }).catch((err) => {
+
+const findLocation = async (userId) => {
+  const userLocation = await User.findOne({ userId: userId }).catch((err) => {
     throw new Error(err);
   });
   const location = userLocation.dataValues.location;
-  // 날씨 찾아오기
-  return weatherState;
+  return location;
 };
 
 const userAuth = async (postId, hashPassword) => {
@@ -35,6 +37,9 @@ const userAuth = async (postId, hashPassword) => {
 };
 
 const newPasswordAuth = (password) => {
+  if(isNaN(parseInt(password))){
+    return false;
+  }
   if (password.length > 6 && isNaN(password)) {
     return true;
   } else {
@@ -42,7 +47,7 @@ const newPasswordAuth = (password) => {
   }
 };
 
-const postPosted = async (title, content, password, userId, weather) => {
+const postPosted = async (title, content, password, userId,weather) => {
   const hashPassword = await crypto
     .createHash("sha256")
     .update(password)
@@ -107,7 +112,7 @@ module.exports = {
   postDeleted,
   postPosted,
   postUpdeted,
-  findWeather,
+  findLocation,
   newPasswordAuth,
   allPostsWithOrdering,
 };
