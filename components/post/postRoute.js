@@ -85,7 +85,7 @@ router.patch("/post", async (req, res, next) => {
       next(err);
     });
 
-    res.status(200).json({ updated });
+    res.status(200).json({ message:"수정이 완료되었습니다" });
   } catch (err) {
     next(err);
   }
