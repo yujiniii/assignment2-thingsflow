@@ -65,8 +65,7 @@ router.post("/post", async (req, res, next) => {
 router.patch("/post", async (req, res, next) => {
   try {
     const { postId, title, content, password, userId } = req.body;
-
-    //const weather = postService.findWeather(userId);
+    const location = await postService.findLocation(userId);
     axios({
       url:weatherUrl,
       method:"get",
@@ -86,7 +85,7 @@ router.patch("/post", async (req, res, next) => {
       next(err);
     });
 
-    res.status(200).json({ updated });
+    res.status(200).json({ message:"수정이 완료되었습니다" });
   } catch (err) {
     next(err);
   }

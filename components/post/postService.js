@@ -112,7 +112,7 @@ const postUpdeted = async (
     .createHash("sha256")
     .update(password)
     .digest("base64");
-  const isPasswordTrue = await userAuth(userId, hashPassword);
+  const isPasswordTrue = await userAuth(postId, hashPassword);
   if (isPasswordTrue) {
     const update = await Post.update(
       {
@@ -145,7 +145,7 @@ const postDeleted = async (postId,password) => {
     .createHash("sha256")
     .update(password)
     .digest("base64");
-  const isPasswordTrue = await userAuth(userId, hashPassword);
+  const isPasswordTrue = await userAuth(postId, hashPassword);
   if (isPasswordTrue) {
     const destroyResult = await Post.destroy({
       where: { postId: postId },
