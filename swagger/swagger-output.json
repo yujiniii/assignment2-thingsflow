@@ -25,7 +25,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "게시글 목록"
           }
         }
       },
@@ -34,10 +34,10 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "message: 게시글 등록 완료"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description":  "message: 비밀번호 규정을 지켜주세요"
           }
         },
         "requestBody": {
@@ -69,7 +69,10 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "message:수정이 완료되었습니다"
+          },
+          "500":{
+            "description": "message:올바른 비밀번호를 입력하세요"
           }
         },
         "requestBody": {
@@ -104,7 +107,10 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "deleted: 1"
+          },
+          "500":{
+            "description": "message:올바른 비밀번호를 입력하세요"
           }
         },
         "requestBody": {
@@ -131,7 +137,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "사용자 목록 출력"
           }
         }
       },
@@ -140,7 +146,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "등록된 사용자 정보"
           }
         },
         "requestBody": {
