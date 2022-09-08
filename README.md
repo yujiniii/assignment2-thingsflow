@@ -15,7 +15,7 @@
 - 게시글은 최근 순으로 보여지고, 되도록이면 페이지네이션을 이용해주세요
 
 ### ERD
-![image](https://user-images.githubusercontent.com/50348197/189041274-6cbe1bfd-7efe-41c0-8d66-1de4b9c88c7e.png)
+![image](https://user-images.githubusercontent.com/50348197/189041989-aa99c478-10d5-47af-b9f6-00d9546980b7.png)
 각 모델간의 관계는 위 사진과 같습니다.  
 한 사용자는(users)는 여러 명의 입사지원한 사용자(posts)를 작성할 수 있습니다.
 
