@@ -1,4 +1,4 @@
-# 게시판 관리 RESTful API 서버
+# 비회원 게시판 관리 RESTful API 서버
 
 - ~[게시판 관리 RESTful API 서버](https://my-node-project-2.ue.r.appspot.com/api-docs/)가 오픈되었습니다!~ 
 
